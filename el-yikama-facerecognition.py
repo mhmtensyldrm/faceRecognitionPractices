@@ -19,10 +19,13 @@ with open("labels.pickle", "rb") as f:
 cap = cv2.VideoCapture(0)
 
 while(True):
+   
+    #result1 firebaseden ilk veriyi alıyor daha sonra program 10 saniye bekliyor result2 ise firebaseden ikinci veriyi alıyor
     result1 = firebase.get('/enes','EveGirdi')
     time.sleep(10)
     result2 = firebase.get('/enes','EveGirdi')
     
+    #eğer o 10 saniye içinde databasedeki veri değişmiş ise(bu senaryoda verinin değişmesi bize kişinin evin önündeki kamerada gözüktüğünü yani kişinin eve giriş yaptığını anlatıyor) program işlevini gerçekleştirmeye başlıyor
     if result1 != result2:
         while(True):
             now = datetime.now()
